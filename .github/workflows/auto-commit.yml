@@ -30,10 +30,19 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
+      - name: Show git status
+        run: |
+          git status --porcelain || true
+          echo "Last commit:" && (git log -1 --oneline || true)
+
       - name: Commit and push
         shell: bash
         run: |
-          msg=$(cat .github/commit_message.txt)
+          if [ -f .github/commit_message.txt ]; then
+            msg=$(cat .github/commit_message.txt)
+          else
+            msg="MusicAI: automated heartbeat"
+          fi
           git add -A
           if git diff --cached --quiet; then
             echo "No changes to commit."
