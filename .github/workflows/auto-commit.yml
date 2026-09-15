@@ -1,8 +1,6 @@
-name: Auto-Commit Music AI (6h)
+name: Retired Auto-Commit Music AI
 
 on:
-  schedule:
-    - cron: '0 */6 * * *' # every 6 hours
   workflow_dispatch:
 
 permissions:
@@ -50,5 +48,4 @@ jobs:
           fi
           git commit -m "$msg"
           git push
-
 
